@@ -1,2 +1,12 @@
 @import './reset.scss';
 @import './theme/theme.scss';
+@import './mixin/media.scss';
+
+.container {
+  margin: 20px auto;
+  max-width: 1440px;
+
+  @include mobile {
+    padding-inline: 20px 0;
+  }
+}

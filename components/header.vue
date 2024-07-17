@@ -1,3 +1,4 @@
+import { Header } from '../.nuxt/components';
 <script setup lang="ts">
 const activeTheme = ref(useColorMode().preference)
 
@@ -20,7 +21,10 @@ function swapTheme() {
 
 <template>
   <div class="header">
-    <div class="btn" @click="swapTheme()">
+    <div class="loog">
+      <h2>Logo xD</h2>
+    </div>
+    <div class="theme" @click="swapTheme()">
       <Icon
         :name="useColorMode().preference === 'light' ? 'line-md:moon-to-sunny-outline-transition' : 'line-md:sunny-outline-to-moon-transition'" />
     </div>
@@ -28,13 +32,25 @@ function swapTheme() {
 </template>
 
 <style scoped lang="scss">
-.btn {
-  width: 40px;
-  height: 40px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  height: 100%;
 
-  span {
-    width: 100%;
-    height: 100%;
+  h2 {
+    font-family: 'Maple Mono Bold', monospace;
+  }
+
+  .theme {
+    width: 40px;
+    height: 40px;
+
+    span {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

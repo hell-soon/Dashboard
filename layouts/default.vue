@@ -1,7 +1,15 @@
 <template>
-  <div>
+  <main class="container block">
     <Header />
     <slot />
     <!-- <Footer /> -->
-  </div>
+  </main>
 </template>
+
+<style lang="scss" scoped>
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+</style>

@@ -13,7 +13,7 @@ defineProps<Props>()
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .button {
   display: flex;
   justify-content: center;
@@ -22,5 +22,11 @@ defineProps<Props>()
   border-radius: 10px;
   border: 1px solid rgb(37, 37, 37);
   cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgb(37, 37, 37);
+  }
 }
 </style>

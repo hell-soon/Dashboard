@@ -1,53 +1,53 @@
 <script setup lang="ts">
-const draggables = ref<HTMLElement[]>([])
+const draggable = ref<HTMLElement | null>(null)
 const block = ref<HTMLElement | null>(null)
-const isDragging = ref<boolean[]>([false, false])
-const offsetX = ref<number[]>([0, 0])
-const offsetY = ref<number[]>([0, 0])
+const isDragging = ref(false)
+const offsetX = ref(0)
+const offsetY = ref(0)
 
 const editDashboard = ref(false)
 
-function startDrag(index: number, e: MouseEvent) {
+function startDrag(e: MouseEvent) {
   if (!editDashboard.value)
     return
-  if (draggables.value[index]) {
-    isDragging.value[index] = true
-    offsetX.value[index] = e.clientX - draggables.value[index].offsetLeft
-    offsetY.value[index] = e.clientY - draggables.value[index].offsetTop
+  if (draggable.value) {
+    isDragging.value = true
+    offsetX.value = e.clientX - draggable.value.offsetLeft
+    offsetY.value = e.clientY - draggable.value.offsetTop
   }
 }
 function drag(e: MouseEvent) {
   if (!editDashboard.value)
     return
-  draggables.value.forEach((draggable, index) => {
-    if (isDragging.value[index] && draggable) {
-      const newLeft = e.clientX - offsetX.value[index]
-      const newTop = e.clientY - offsetY.value[index]
 
-      if (newLeft >= 0 && newTop >= 0
-        && newLeft + draggable.offsetWidth <= block.value!.clientWidth
-        && newTop + draggable.offsetHeight <= block.value!.clientHeight) {
-        draggable.style.left = `${newLeft}px`
-        draggable.style.top = `${newTop}px`
-      }
+  if (isDragging.value && draggable.value) {
+    const newLeft = e.clientX - offsetX.value
+    const newTop = e.clientY - offsetY.value
+
+    if (newLeft >= 0 && newTop >= 0
+      && newLeft + draggable.value.offsetWidth <= block.value!.clientWidth
+      && newTop + draggable.value.offsetHeight <= block.value!.clientHeight
+    ) {
+      draggable.value.style.left = `${newLeft}px`
+      draggable.value.style.top = `${newTop}px`
     }
-  })
+  }
 }
 
-function stopDrag(index: number) {
+function stopDrag() {
   if (!editDashboard.value)
     return
-  isDragging.value[index] = false
+  isDragging.value = false
 }
 
 onMounted(() => {
   document.addEventListener('mousemove', drag)
-  document.addEventListener('mouseup', () => isDragging.value.forEach((_, index) => stopDrag(index)))
+  document.addEventListener('mouseup', stopDrag)
 })
 
 onUnmounted(() => {
   document.removeEventListener('mousemove', drag)
-  document.removeEventListener('mouseup', () => isDragging.value.forEach((_, index) => stopDrag(index)))
+  document.removeEventListener('mouseup', stopDrag)
 })
 </script>
 
@@ -58,8 +58,9 @@ onUnmounted(() => {
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">
-      <div v-for="(_, index) in [0, 1, 2, 3]" :key="index" ref="draggables" class="draggable"
-        @mousedown="startDrag(index, $event)" />
+      <!-- <div ref="draggable" :class="{ active: editDashboard }" class="draggable" @mousedown="startDrag($event)" /> -->
+
+      <PinWeather ref="draggable" :class="{ active: editDashboard }" @mousedown="startDrag($event)" />
     </div>
   </section>
 </template>
@@ -69,30 +70,25 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .block {
   position: relative;
   display: flex;
-  border: 2px solid rgb(37, 37, 37);
-  border-radius: 20px;
-  padding: 10px;
-  height: 500px;
+  height: 70vh;
 
   .draggable {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 20px;
-    background-color: rgb(100, 100, 100);
-
-    button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+    background-color: rgb(233, 231, 231);
+    box-shadow: 0px 10px 10px rgb(153, 153, 153);
   }
+}
+
+.active {
+  animation: spin 0.4s infinite;
 }
 </style>

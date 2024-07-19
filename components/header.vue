@@ -1,21 +1,28 @@
 import { Header } from '../.nuxt/components';
 <script setup lang="ts">
-const activeTheme = ref(useColorMode().preference)
+enum ThemesVariant {
+  Light = 'light',
+  Dark = 'dark',
+}
+
+const icon: Record<ThemesVariant, string> = {
+  [ThemesVariant.Light]: 'line-md:sunny-outline',
+  [ThemesVariant.Dark]: 'line-md:sunny-outline-to-moon-transition',
+}
+
+const theme = useColorMode()
+
+const iconTheme = computed(() => icon[theme.value as keyof typeof icon])
 
 function swapTheme() {
-  activeTheme.value = activeTheme.value === 'light' ? 'dark' : 'light'
-  useColorMode().preference = activeTheme.value
-
-  // if (activeTheme.value === 'light') {
-  //   useColorMode().preference = 'dark'
-  //   // icon.value = 'line-md:sunny-outline-to-moon-transition'
-  //   activeTheme.value = 'dark'
-  // }
-  // else if (activeTheme.value === 'dark') {
-  //   useColorMode().preference = 'light'
-  //   // icon.value = 'line-md:moon-to-sunny-outline-transition'
-  //   activeTheme.value = 'light'
-  // }
+  switch (theme.value) {
+    case 'light':
+      theme.preference = 'dark'
+      break
+    case 'dark':
+      theme.preference = 'light'
+      break
+  }
 }
 </script>
 
@@ -25,8 +32,9 @@ function swapTheme() {
       <h2>Logo xD</h2>
     </div>
     <div class="theme" @click="swapTheme()">
-      <Icon
-        :name="useColorMode().preference === 'light' ? 'line-md:moon-to-sunny-outline-transition' : 'line-md:sunny-outline-to-moon-transition'" />
+      <ClientOnly>
+        <Icon :key="theme.value" :icon="iconTheme" :name="iconTheme" />
+      </ClientOnly>
     </div>
   </div>
 </template>

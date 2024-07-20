@@ -11,6 +11,7 @@ function startDrag(e: MouseEvent) {
   if (!editDashboard.value)
     return
   if (draggable.value) {
+
     isDragging.value = true
     offsetX.value = e.clientX - draggable.value.offsetLeft
     offsetY.value = e.clientY - draggable.value.offsetTop
@@ -34,7 +35,7 @@ function drag(e: MouseEvent) {
   }
 }
 
-function stopDrag() {
+function stopDrag() { 
   if (!editDashboard.value)
     return
   isDragging.value = false
@@ -58,9 +59,8 @@ onUnmounted(() => {
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">
-      <!-- <div ref="draggable" :class="{ active: editDashboard }" class="draggable" @mousedown="startDrag($event)" /> -->
-
-      <PinWeather ref="draggable" :class="{ active: editDashboard }" @mousedown="startDrag($event)" />
+      <PinWeather @ref-created="draggable = $event" @mouse-down="startDrag($event)"
+        :class="{ active: editDashboard }" />
     </div>
   </section>
 </template>
@@ -89,6 +89,7 @@ onUnmounted(() => {
 }
 
 .active {
+  cursor: pointer;
   animation: spin 0.4s infinite;
 }
 </style>

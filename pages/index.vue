@@ -54,29 +54,28 @@ onUnmounted(() => {
 <template>
   <section>
     <div class="header">
-      <h2>Draggables</h2>
+      <h3>Dashboard</h3>
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">
-      <!-- <div ref="draggable" :class="{ active: editDashboard }" class="draggable" @mousedown="startDrag($event)" /> -->
-
-      <PinWeather ref="draggable" :class="{ active: editDashboard }" @mousedown="startDrag($event)" />
+      <PinWeather :class="{ active: editDashboard }" @ref-created="draggable = $event"
+        @mouse-down="startDrag($event)" />
     </div>
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .block {
   position: relative;
   display: flex;
-  height: 70vh;
+  height: 700px;
 
   .draggable {
     position: absolute;
@@ -89,6 +88,7 @@ onUnmounted(() => {
 }
 
 .active {
+  cursor: pointer;
   animation: spin 0.4s infinite;
 }
 </style>

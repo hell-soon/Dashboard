@@ -1,4 +1,4 @@
 export interface CityParams {
-  lan: number
+  lat: number
   lon: number
 }

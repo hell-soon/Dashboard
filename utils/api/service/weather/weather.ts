@@ -1,6 +1,6 @@
-import type { Weather as WeatherResponse } from "~/types/models/weather";
-import type { WeatherParams } from "./weather.type";
+import type { WeatherParams } from './weather.type'
+import type { Weather as WeatherResponse } from '~/types/models/weather'
 
 export function getWeather(params?: WeatherParams) {
-  return getReq<WeatherResponse>('', params)
+  return getReq<WeatherResponse>('VITE_API_WEATHER', '', params)
 }

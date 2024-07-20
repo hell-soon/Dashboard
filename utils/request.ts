@@ -1,7 +1,6 @@
-
-async function fetch<Res>(url: string, options?: any, headers?: any) {
+async function fetch<Res>(apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'], url: string, options?: any, headers?: any) {
   try {
-    const reqUrl = import.meta.env.VITE_API_URL + url
+    const reqUrl = import.meta.env[apiSelect] + url
 
     const customHeaders = { access: useCookie('access').value, ...headers }
 
@@ -23,18 +22,38 @@ async function fetch<Res>(url: string, options?: any, headers?: any) {
   }
 }
 
-export function getReq<Res>(url: string, params?: any, headers?: any) {
-  return fetch<Res>(url, { method: 'get', params }, headers)
+export function getReq<Res>(
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  url: string,
+  params?: any,
+  headers?: any,
+) {
+  return fetch<Res>(apiSelect, url, { method: 'get', params }, headers)
 }
 
-export function postReq<Res>(url: string, params?: any, headers?: any) {
-  return fetch<Res>(url, { method: 'post', body: params }, headers)
+export function postReq<Res>(
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  url: string,
+  params?: any,
+  headers?: any,
+) {
+  return fetch<Res>(apiSelect, url, { method: 'post', body: params }, headers)
 }
 
-export function putReq<Res>(url: string, params?: any, headers?: any) {
-  return fetch<Res>(url, { method: 'put', body: params }, headers)
+export function putReq<Res>(
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  url: string,
+  params?: any,
+  headers?: any,
+) {
+  return fetch<Res>(apiSelect, url, { method: 'put', body: params }, headers)
 }
 
-export function delReq<Res>(url: string, params?: any, headers?: any) {
-  return fetch<Res>(url, { method: 'delete', params }, headers)
+export function delReq<Res>(
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  url: string,
+  params?: any,
+  headers?: any,
+) {
+  return fetch<Res>(apiSelect, url, { method: 'delete', params }, headers)
 }

@@ -1,102 +1,102 @@
 function getWeatherIcon(nameIcon: string) {
-  switch (nameIcon) {
-    case 'Sunny':
+  switch (nameIcon.toLowerCase()) {
+    case 'sunny':
       return 'meteocons:clear-day'
-    case 'Clear':
+    case 'clear':
       return 'meteocons:clear-night'
-    case 'Partly Cloudy':
+    case 'partly cloudy':
       return 'meteocons:partly-cloudy-day'
-    case 'Cloudy':
+    case 'cloudy':
       return 'meteocons:cloudy'
-    case 'Overcast':
+    case 'overcast':
       return 'meteocons:overcast'
-    case 'Mist':
+    case 'mist':
       return 'meteocons:mist'
-    case 'Patchy rain possible':
+    case 'patchy rain possible':
       return 'meteocons:extreme-rain'
-    case 'Patchy snow possible':
+    case 'patchy snow possible':
       return 'meteocons:extreme-snow'
-    case 'Patchy sleet possible':
+    case 'patchy sleet possible':
       return 'meteocons:extreme-sleet'
-    case 'Patchy freezing drizzle possible':
+    case 'patchy freezing drizzle possible':
       return 'meteocons:extreme-sleet'
-    case 'Thundery outbreaks possible':
+    case 'thundery outbreaks possible':
       return 'meteocons:thunderstorms-extreme'
-    case 'Blowing snow':
+    case 'blowing snow':
       return 'meteocons:snow'
-    case 'Blizzard':
+    case 'blizzard':
       return 'meteocons:blizzard'
-    case 'Fog':
+    case 'fog':
       return 'meteocons:fog'
-    case 'Freezing fog':
+    case 'freezing fog':
       return 'meteocons:fog'
-    case 'Patchy light drizzle':
+    case 'patchy light drizzle':
       return 'meteocons:extreme-day-rain'
-    case 'Light drizzle':
+    case 'light drizzle':
       return 'meteocons:extreme-day-rain'
-    case 'Freezing drizzle':
+    case 'freezing drizzle':
       return 'meteocons:extreme-day-sleet'
-    case 'Heavy freezing drizzle':
+    case 'heavy freezing drizzle':
       return 'meteocons:extreme-day-sleet'
-    case 'Patchy light rain':
+    case 'patchy light rain':
       return 'meteocons:extreme-day-rain'
-    case 'Light rain':
+    case 'light rain':
       return 'meteocons:extreme-day-rain'
-    case 'Moderate rain at times':
+    case 'moderate rain at times':
       return 'meteocons:extreme-day-rain'
-    case 'Moderate rain':
+    case 'moderate rain':
       return 'meteocons:extreme-day-rain'
-    case 'Heavy rain at times':
+    case 'heavy rain at times':
       return 'meteocons:extreme-day-rain'
-    case 'Heavy rain':
+    case 'heavy rain':
       return 'meteocons:extreme-day-rain'
-    case 'Light freezing rain':
+    case 'light freezing rain':
       return 'meteocons:extreme-day-sleet'
-    case 'Moderate or heavy freezing rain':
+    case 'moderate or heavy freezing rain':
       return 'meteocons:extreme-day-sleet'
-    case 'Light sleet':
+    case 'light sleet':
       return 'meteocons:extreme-day-sleet'
-    case 'Moderate or heavy sleet':
+    case 'moderate or heavy sleet':
       return 'meteocons:extreme-day-sleet'
-    case 'Patchy light snow':
+    case 'patchy light snow':
       return 'meteocons:extreme-day-snow'
-    case 'Light snow':
+    case 'light snow':
       return 'meteocons:extreme-day-snow'
-    case 'Patchy moderate snow':
+    case 'patchy moderate snow':
       return 'meteocons:extreme-day-snow'
-    case 'Moderate snow':
+    case 'moderate snow':
       return 'meteocons:extreme-day-snow'
-    case 'Patchy heavy snow':
+    case 'patchy heavy snow':
       return 'meteocons:extreme-day-snow'
-    case 'Heavy snow':
+    case 'heavy snow':
       return 'meteocons:extreme-day-snow'
-    case 'Ice pellets':
+    case 'ice pellets':
       return 'meteocons:snow'
-    case 'Light rain shower':
+    case 'light rain shower':
       return 'meteocons:extreme-day-rain'
-    case 'Moderate or heavy rain shower':
+    case 'moderate or heavy rain shower':
       return 'meteocons:extreme-day-rain'
-    case 'Torrential rain shower':
+    case 'torrential rain shower':
       return 'meteocons:extreme-day-rain'
-    case 'Light sleet showers':
+    case 'light sleet showers':
       return 'meteocons:extreme-day-sleet'
-    case 'Moderate or heavy sleet showers':
+    case 'moderate or heavy sleet showers':
       return 'meteocons:extreme-day-sleet'
-    case 'Light snow showers':
+    case 'light snow showers':
       return 'meteocons:extreme-day-snow'
-    case 'Moderate or heavy snow showers':
+    case 'moderate or heavy snow showers':
       return 'meteocons:extreme-day-snow'
-    case 'Light showers of ice pellets':
+    case 'light showers of ice pellets':
       return 'meteocons:snow'
-    case 'Moderate or heavy showers of ice pellets':
+    case 'moderate or heavy showers of ice pellets':
       return 'meteocons:snow'
-    case 'Patchy light rain with thunder':
+    case 'patchy light rain with thunder':
       return 'meteocons:thunderstorms-extreme'
-    case 'Moderate or heavy rain with thunder':
+    case 'moderate or heavy rain with thunder':
       return 'meteocons:thunderstorms-extreme'
-    case 'Patchy light snow with thunder':
+    case 'patchy light snow with thunder':
       return 'meteocons:thunderstorms-extreme'
-    case 'Moderate or heavy snow with thunder':
+    case 'moderate or heavy snow with thunder':
       return 'meteocons:thunderstorms-extreme'
   }
 }

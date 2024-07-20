@@ -2,7 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-07-08',
   ssr: true,
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+  },
   modules: [
     '@pinia/nuxt',
     '@nuxt/eslint',

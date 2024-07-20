@@ -1,6 +1,5 @@
-import type { Weather } from '../../types/models/weather';
-import type { WeatherParams } from '~/utils/api/service/weather/weather.type';
-
+import type { Weather } from '../../types/models/weather'
+import type { WeatherParams } from '~/utils/api/service/weather/weather.type'
 
 //* --- State ----------------------------------------------- *//
 interface WeatherState {

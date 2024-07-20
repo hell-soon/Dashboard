@@ -35,7 +35,7 @@ function drag(e: MouseEvent) {
   }
 }
 
-function stopDrag() { 
+function stopDrag() {
   if (!editDashboard.value)
     return
   isDragging.value = false
@@ -65,7 +65,7 @@ onUnmounted(() => {
   </section>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .header {
   display: flex;
   justify-content: space-between;

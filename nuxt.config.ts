@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-07-08',
+  ssr: true,
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',
@@ -10,6 +11,7 @@ export default defineNuxtConfig({
   ],
   imports: {
     autoImport: true,
+    dirs: ['./utils/', './utils/api', './store/'],
   },
   eslint: {
     config: {

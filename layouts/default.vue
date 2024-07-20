@@ -7,7 +7,7 @@
 </template>
 
 <style lang="scss" scoped>
-.block {
+.pin {
   display: flex;
   flex-direction: column;
   gap: 20px;

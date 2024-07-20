@@ -29,7 +29,7 @@ function swapTheme() {
 <template>
   <div class="header">
     <div class="loog">
-      <h2>Logo xD</h2>
+      <h2>DsH</h2>
     </div>
     <div class="theme" @click="swapTheme()">
       <ClientOnly>

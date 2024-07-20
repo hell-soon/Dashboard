@@ -55,7 +55,7 @@ onUnmounted(() => {
 <template>
   <section>
     <div class="header">
-      <h2>Draggables</h2>
+      <h3>Dashboard</h3>
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">
@@ -70,13 +70,13 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .block {
   position: relative;
   display: flex;
-  height: 70vh;
+  height: 700px;
 
   .draggable {
     position: absolute;

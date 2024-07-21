@@ -26,45 +26,6 @@ const { data } = await useFetch('/api/geolocation')
 searchCityParams.q = data.value?.city
 
 fetchWeather(searchCityParams)
-
-// async function fetchCityByGeolocation(): Promise<void> {
-//   const lat = ref(0)
-//   const lon = ref(0)
-
-//   try {
-//     const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-//       navigator.geolocation.getCurrentPosition(resolve, reject)
-//     })
-//     lat.value = position.coords.latitude
-//     lon.value = position.coords.longitude
-
-//     const data = await api.city({
-//       lat: lat.value,
-//       lon: lon.value,
-//     })
-
-//     if (data.address.city) {
-//       searchCityParams.q = data.address.city
-//       localStorage.setItem('city', data.address.city)
-//       await fetchWeather(searchCityParams)
-//     }
-//     else {
-//       // eslint-disable-next-line no-alert
-//       alert('Error occurred while retrieving city name.')
-//     }
-//   }
-//   catch (error) {
-//     console.error('Error fetching geolocation:', error)
-//   }
-// }
-
-// if (searchCityParams.q) {
-//   fetchCityByGeolocation()
-// }
-// else {
-//   searchParams.q = city.value
-//   fetchWeather(searchParams)
-// }
 </script>
 
 <template>
@@ -94,7 +55,6 @@ fetchWeather(searchCityParams)
   align-items: center;
   padding: 20px;
   border-radius: 20px;
-  background-color: var(--bg-primary-color);
   box-shadow: 0px 10px 10px var(--bs-color-primary);
 }
 </style>

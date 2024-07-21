@@ -10,10 +10,14 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
+    '@dargmuesli/nuxt-cookie-control',
   ],
   imports: {
     autoImport: true,
     dirs: ['./utils/', './utils/api', './store/'],
+  },
+  colorMode: {
+    dataValue: 'theme',
   },
   eslint: {
     config: {
@@ -21,4 +25,15 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/scss/global.scss'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+          @import '~/assets/scss/theme/_theme.scss';
+        `,
+        },
+      },
+    },
+  },
 })

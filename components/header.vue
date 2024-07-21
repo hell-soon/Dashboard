@@ -47,10 +47,6 @@ function swapTheme() {
   align-items: center;
   height: 100%;
 
-  h2 {
-    font-family: 'Maple Mono Bold', monospace;
-  }
-
   .theme {
     width: 40px;
     height: 40px;

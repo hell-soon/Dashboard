@@ -49,17 +49,31 @@ onUnmounted(() => {
   document.removeEventListener('mousemove', drag)
   document.removeEventListener('mouseup', stopDrag)
 })
+
+const city = ref<string | null>(null)
+
+const { data } = await useAsyncData('geolocation', async (nuxtApp) => {
+  const response = await fetch(`/api/geolocation`)
+  const data = await response.json()
+
+  return data
+})
+
+console.log('data', data.value)
 </script>
 
 <template>
   <section>
     <div class="header">
       <h3>Dashboard</h3>
+      <h2>{{ city }}</h2>
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">
-      <PinWeather :class="{ active: editDashboard }" @ref-created="draggable = $event"
-        @mouse-down="startDrag($event)" />
+      <PinWeather
+        :class="{ active: editDashboard }" @ref-created="draggable = $event"
+        @mouse-down="startDrag($event)"
+      />
     </div>
   </section>
 </template>

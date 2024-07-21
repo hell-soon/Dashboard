@@ -1,15 +1,15 @@
-import { useWeatherStore } from "./main/weather"
+import { useWeatherStore } from './main/weather'
 
 type ExtractStoreId<T> = T extends { $id: infer U } ? U : never
 
 interface IStoreTypes {
-  wather: ReturnType<typeof useWeatherStore>
+  weather: ReturnType<typeof useWeatherStore>
 }
 
 type StoreKeys = ExtractStoreId<IStoreTypes[keyof IStoreTypes]>
 
 export const stores: Readonly<{ [K in StoreKeys]: () => IStoreTypes[K] }> = Object.freeze({
-  wather: useWeatherStore,
+  weather: useWeatherStore,
 })
 
 function setupStore<T extends StoreKeys>(key: T): Readonly<IStoreTypes[T]>

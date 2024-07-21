@@ -16,6 +16,8 @@ function getWeatherIcon(nameIcon: string) {
       return 'meteocons:extreme-rain'
     case 'patchy snow possible':
       return 'meteocons:extreme-snow'
+    case 'patchy rain nearby':
+      return 'meteocons:extreme-rain'
     case 'patchy sleet possible':
       return 'meteocons:extreme-sleet'
     case 'patchy freezing drizzle possible':

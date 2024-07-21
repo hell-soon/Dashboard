@@ -17,42 +17,46 @@ const searchCityParams: WeatherParams = reactive({
 const { fetchWeather } = store.weather
 const { weatherInfo } = storeToRefs(store.weather)
 
-onMounted(async () => {
+onMounted(() => {
   emit('refCreated', weatherBlock.value!)
-
-  await fetchCityByGeolocation()
 })
 
-async function fetchCityByGeolocation(): Promise<void> {
-  const lat = ref(0)
-  const lon = ref(0)
+const { data } = await useFetch('/api/geolocation')
 
-  try {
-    const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject)
-    })
-    lat.value = position.coords.latitude
-    lon.value = position.coords.longitude
+searchCityParams.q = data.value?.city
 
-    const data = await api.city({
-      lat: lat.value,
-      lon: lon.value,
-    })
+fetchWeather(searchCityParams)
 
-    if (data.address.city) {
-      searchCityParams.q = data.address.city
-      localStorage.setItem('city', data.address.city)
-      await fetchWeather(searchCityParams)
-    }
-    else {
-      // eslint-disable-next-line no-alert
-      alert('Error occurred while retrieving city name.')
-    }
-  }
-  catch (error) {
-    console.error('Error fetching geolocation:', error)
-  }
-}
+// async function fetchCityByGeolocation(): Promise<void> {
+//   const lat = ref(0)
+//   const lon = ref(0)
+
+//   try {
+//     const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+//       navigator.geolocation.getCurrentPosition(resolve, reject)
+//     })
+//     lat.value = position.coords.latitude
+//     lon.value = position.coords.longitude
+
+//     const data = await api.city({
+//       lat: lat.value,
+//       lon: lon.value,
+//     })
+
+//     if (data.address.city) {
+//       searchCityParams.q = data.address.city
+//       localStorage.setItem('city', data.address.city)
+//       await fetchWeather(searchCityParams)
+//     }
+//     else {
+//       // eslint-disable-next-line no-alert
+//       alert('Error occurred while retrieving city name.')
+//     }
+//   }
+//   catch (error) {
+//     console.error('Error fetching geolocation:', error)
+//   }
+// }
 
 // if (searchCityParams.q) {
 //   fetchCityByGeolocation()

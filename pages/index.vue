@@ -49,18 +49,12 @@ onUnmounted(() => {
   document.removeEventListener('mousemove', drag)
   document.removeEventListener('mouseup', stopDrag)
 })
-
-const city = ref<string | null>(null)
-
-const { data } = await useFetch('/api/geolocation')
-console.log('data', data.value)
 </script>
 
 <template>
   <section>
     <div class="header">
       <h3>Dashboard</h3>
-      <h2>{{ city }}</h2>
       <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
     </div>
     <div ref="block" class="block">

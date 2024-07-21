@@ -52,13 +52,7 @@ onUnmounted(() => {
 
 const city = ref<string | null>(null)
 
-const { data } = await useAsyncData('geolocation', async (nuxtApp) => {
-  const response = await fetch(`/api/geolocation`)
-  const data = await response.json()
-
-  return data
-})
-
+const { data } = await useFetch('/api/geolocation')
 console.log('data', data.value)
 </script>
 

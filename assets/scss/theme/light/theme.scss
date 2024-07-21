@@ -1,0 +1,10 @@
+@use './variables' as light;
+
+@mixin light-theme {
+  --bg-primary-color: #{light.$br-color-primary};
+  --bg-secondary-color: #{light.$br-color-secondary};
+
+  --text-color: black;
+
+  --bs-color-primary: #{light.$bs-color-primary};
+}

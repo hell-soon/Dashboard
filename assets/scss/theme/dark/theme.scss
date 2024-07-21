@@ -1,0 +1,10 @@
+@use './variables' as dark;
+
+@mixin dark-theme {
+  --bg-primary-color: #{dark.$br-color-primary};
+  --bg-secondary-color: #{dark.$br-color-secondary};
+
+  --text-color: white;
+
+  --bs-color-primary: #{dark.$bs-color-primary};
+}

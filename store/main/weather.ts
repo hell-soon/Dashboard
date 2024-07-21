@@ -8,7 +8,7 @@ interface WeatherState {
 }
 
 //* --- Store ----------------------------------------------- *//
-export const useWeatherStore = defineStore('wather', {
+export const useWeatherStore = defineStore('weather', {
   state: (): WeatherState => ({
     weatherInfo: {} as Weather,
     error: null,

@@ -7,26 +7,26 @@ const emit = defineEmits<{
   (e: 'mouse-down', move: MouseEvent): void
 }>()
 
-const weatherBlock = ref<HTMLElement | null>(null)
-const searchParams: WeatherParams = reactive({
-  q: 'Tomsk',
-})
-
 const store = setupStore(['weather'])
+
+const weatherBlock = ref<HTMLElement | null>(null)
+const searchCityParams: WeatherParams = reactive({
+  q: '',
+})
 
 const { fetchWeather } = store.weather
 const { weatherInfo } = storeToRefs(store.weather)
 
-onMounted(() => {
+onMounted(async () => {
   emit('refCreated', weatherBlock.value!)
+
+  await fetchCityByGeolocation()
 })
 
-fetchWeather(searchParams)
-
-const lat = ref(0)
-const lon = ref(0)
-
 async function fetchCityByGeolocation(): Promise<void> {
+  const lat = ref(0)
+  const lon = ref(0)
+
   try {
     const position = await new Promise<GeolocationPosition>((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -40,24 +40,21 @@ async function fetchCityByGeolocation(): Promise<void> {
     })
 
     if (data.address.city) {
-      searchParams.q = data.address.city
-      fetchWeather(searchParams)
+      searchCityParams.q = data.address.city
+      localStorage.setItem('city', data.address.city)
+      await fetchWeather(searchCityParams)
     }
     else {
-      console.error('Error occurred while retrieving city: ', data)
+      // eslint-disable-next-line no-alert
+      alert('Error occurred while retrieving city name.')
     }
   }
   catch (error) {
     console.error('Error fetching geolocation:', error)
   }
-  // if (navigator && navigator.geolocation) {
-  // }
-  // else {
-  //   console.error('Geolocation is not supported by this browser.')
-  // }
 }
 
-// if (!city.value) {
+// if (searchCityParams.q) {
 //   fetchCityByGeolocation()
 // }
 // else {
@@ -68,6 +65,7 @@ async function fetchCityByGeolocation(): Promise<void> {
 
 <template>
   <div
+    v-if="searchCityParams.q"
     ref="weatherBlock"
     class="pin"
     @mousedown="emit('mouse-down', $event)"
@@ -77,6 +75,7 @@ async function fetchCityByGeolocation(): Promise<void> {
     <Icon
       :name="getWeatherIcon(weatherInfo.current.condition.text) ?? ''"
       size="100"
+      s
     />
     <p>{{ weatherInfo.current.condition.text }}</p>
   </div>
@@ -91,7 +90,7 @@ async function fetchCityByGeolocation(): Promise<void> {
   align-items: center;
   padding: 20px;
   border-radius: 20px;
-  background-color: var(--bg-secondary-color);
+  background-color: var(--bg-primary-color);
   box-shadow: 0px 10px 10px var(--bs-color-primary);
 }
 </style>

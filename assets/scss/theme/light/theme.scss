@@ -1,6 +1,8 @@
 @use './variables' as light;
 
 @mixin light-theme {
+  --bg-main-color: #{light.$br-color-main};
+  
   --bg-primary-color: #{light.$br-color-primary};
   --bg-secondary-color: #{light.$br-color-secondary};
 

@@ -1,6 +1,7 @@
+import type { City } from '~/types/models/city'
+
 export default defineEventHandler(async (event) => {
   const clientIp = getRequestHeader(event, 'x-forwarded-for') || event.node.req.socket.remoteAddress
-  console.log('clientIp', clientIp)
 
   if (!clientIp) {
     throw createError({ statusCode: 400, statusMessage: 'Client IP not found' })
@@ -8,9 +9,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const response = await fetch(`http://ip-api.com/json/${clientIp}`)
-    const data = await response.json()
-
-    console.log('response', data)
+    const data: City = await response.json()
 
     return data
   }

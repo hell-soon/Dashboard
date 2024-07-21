@@ -23,7 +23,7 @@ onMounted(() => {
 
 const { data } = await useFetch('/api/geolocation')
 
-searchCityParams.q = data.value?.city
+searchCityParams.q = data.value?.regionName ? data.value?.regionName : 'Tomsk'
 
 fetchWeather(searchCityParams)
 </script>

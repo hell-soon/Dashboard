@@ -16,6 +16,7 @@ function startDrag(e: MouseEvent) {
     offsetY.value = e.clientY - draggable.value.offsetTop
   }
 }
+
 function drag(e: MouseEvent) {
   if (!editDashboard.value)
     return
@@ -55,11 +56,15 @@ onUnmounted(() => {
   <section>
     <div class="header">
       <h3>Dashboard</h3>
-      <SharedButton :text="editDashboard ? 'Save' : 'Edit'" @click="editDashboard = !editDashboard" />
+      <SharedButton
+        :text="editDashboard ? 'Save' : 'Edit'"
+        @click="editDashboard = !editDashboard"
+      />
     </div>
     <div ref="block" class="block">
       <PinWeather
-        :class="{ active: editDashboard }" @ref-created="draggable = $event"
+        :class="{ active: editDashboard }"
+        @ref-created="draggable = $event"
         @mouse-down="startDrag($event)"
       />
     </div>
@@ -78,15 +83,6 @@ onUnmounted(() => {
   position: relative;
   display: flex;
   height: 700px;
-
-  .draggable {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
-    background-color: rgb(233, 231, 231);
-    box-shadow: 0px 10px 10px rgb(153, 153, 153);
-  }
 }
 
 .active {

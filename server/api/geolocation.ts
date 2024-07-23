@@ -2,7 +2,6 @@ import type { City } from '~/types/models/city'
 
 export default defineEventHandler(async (event) => {
   const clientIp = getRequestHeader(event, 'x-forwarded-for') || event.node.req.socket.remoteAddress
-  console.log('clientIp', clientIp)
 
   if (!clientIp) {
     throw createError({ statusCode: 400, statusMessage: 'Client IP not found' })

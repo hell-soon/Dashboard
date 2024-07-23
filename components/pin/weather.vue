@@ -23,9 +23,29 @@ onMounted(() => {
 
 const { data } = await useFetch('/api/geolocation')
 
-searchCityParams.q = data.value?.regionName ? data.value?.regionName : 'Tomsk'
+searchCityParams.q = data.value?.regionName ? data.value?.regionName : 'Oslo'
 
 fetchWeather(searchCityParams)
+
+const editPin = ref(false)
+const iconEdit = ref('line-md:edit')
+
+function a() {
+  editPin.value = !editPin.value
+
+  if (editPin.value) {
+    iconEdit.value = 'line-md:close-small'
+  }
+  else {
+    iconEdit.value = 'line-md:edit'
+  }
+}
+
+const weatherInfoFull = ref({
+  cityName: true,
+  temp: false,
+  text: false,
+})
 </script>
 
 <template>
@@ -35,26 +55,81 @@ fetchWeather(searchCityParams)
     class="pin"
     @mousedown="emit('mouse-down', $event)"
   >
-    <h3>{{ weatherInfo.location.name }}</h3>
-    <p>{{ weatherInfo.current.temp_c.toFixed(0) }}°C</p>
-    <Icon
-      :name="getWeatherIcon(weatherInfo.current.condition.text) ?? ''"
-      size="100"
-      s
-    />
-    <p>{{ weatherInfo.current.condition.text }}</p>
+    <div class="pin-contain">
+      <Icon
+        :name="getWeatherIcon(weatherInfo.current.condition.text) ?? ''"
+        size="100"
+      />
+      <div class="pin-contain__text">
+        <h2 v-show="weatherInfoFull.cityName">
+          {{ weatherInfo.location.name }}
+        </h2>
+        <p v-show="weatherInfoFull.temp">
+          {{ weatherInfo.current.temp_c.toFixed(0) }}°C
+        </p>
+        <p v-show="weatherInfoFull.text">
+          {{ weatherInfo.current.condition.text }}
+        </p>
+      </div>
+    </div>
+    <div class="pin-footer">
+      <Icon
+        :key="iconEdit"
+        :name="iconEdit"
+        size="25"
+        @click="a"
+      />
+      <div v-if="editPin" class="editor pin">
+        <v-checkbox v-model="weatherInfoFull.cityName" label="View name City" />
+        <v-checkbox v-model="weatherInfoFull.temp" label="View Temp" />
+        <v-checkbox v-model="weatherInfoFull.text" label="View Text" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+:deep(.v-input) {
+  height: 20%;
+}
+
 .pin {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0px 10px 10px var(--bs-color-primary);
+  box-shadow: 0px 0px 20px var(--bs-color-primary);
+  background-color: var(--bg-main-color);
+
+  &-footer {
+    display: flex;
+    width: 100%;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: end;
+
+    .editor {
+      border-radius: 20px;
+      position: absolute;
+      right: -220px;
+      top: 0;
+      width: 200px;
+      height: 200px;
+      padding: 15px;
+    }
+  }
+
+  &-contain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
+    &__text {
+      align-items: end;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
 }
 </style>

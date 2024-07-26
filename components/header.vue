@@ -1,4 +1,3 @@
-import { Header } from '../.nuxt/components';
 <script setup lang="ts">
 enum ThemesVariant {
   Light = 'light',
@@ -45,7 +44,6 @@ function swapTheme() {
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  height: 100%;
 
   .theme {
     width: 40px;

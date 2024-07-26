@@ -1,3 +1,4 @@
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-07-08',
@@ -11,10 +12,19 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/color-mode',
     '@dargmuesli/nuxt-cookie-control',
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error: Explanation of why the error is necessary
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
   ],
   imports: {
     autoImport: true,
     dirs: ['./utils/', './utils/api', './store/'],
+  },
+  build: {
+    transpile: ['vuetify'],
   },
   colorMode: {
     dataValue: 'theme',
@@ -33,6 +43,11 @@ export default defineNuxtConfig({
           @import '~/assets/scss/theme/_theme.scss';
         `,
         },
+      },
+    },
+    vue: {
+      template: {
+        transformAssetUrls,
       },
     },
   },

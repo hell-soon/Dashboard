@@ -67,6 +67,7 @@ onUnmounted(() => {
         @ref-created="draggable = $event"
         @mouse-down="startDrag($event)"
       />
+      <SharedPinEditor />
     </div>
   </section>
 </template>

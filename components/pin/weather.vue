@@ -2,12 +2,12 @@
 import type { WeatherParams } from '~/utils/api/service/weather/weather.type'
 import getWeatherIcon from '~/utils/shared/weather-icons'
 
-const emit = defineEmits<{
+const moveEmit = defineEmits<{
   (e: 'refCreated', ref: HTMLElement): void
   (e: 'mouse-down', move: MouseEvent): void
 }>()
 
-const store = setupStore(['weather'])
+const store = setupStore(['weather', 'global'])
 
 const weatherBlock = ref<HTMLElement | null>(null)
 const searchCityParams: WeatherParams = reactive({
@@ -18,7 +18,7 @@ const { fetchWeather } = store.weather
 const { weatherInfo } = storeToRefs(store.weather)
 
 onMounted(() => {
-  emit('refCreated', weatherBlock.value!)
+  moveEmit('refCreated', weatherBlock.value!)
 })
 
 const { data } = await useFetch('/api/geolocation')
@@ -28,22 +28,21 @@ searchCityParams.q = data.value?.regionName ? data.value?.regionName : 'Oslo'
 fetchWeather(searchCityParams)
 
 const editPin = ref(false)
-const iconEdit = ref('line-md:edit')
 
-function a() {
-  editPin.value = !editPin.value
+const instance = getCurrentInstance()
 
-  if (editPin.value) {
-    iconEdit.value = 'line-md:close-small'
-  }
-  else {
-    iconEdit.value = 'line-md:edit'
-  }
+function add() {
+  const componentName = instance?.type
+  store.global.selectedComponetn = componentName
+
+  store.global.openEdit = true
 }
+
+const iconEdit = ref('line-md:edit')
 
 const weatherInfoFull = ref({
   cityName: true,
-  temp: false,
+  temp: true,
   text: false,
 })
 </script>
@@ -53,7 +52,7 @@ const weatherInfoFull = ref({
     v-if="searchCityParams.q"
     ref="weatherBlock"
     class="pin"
-    @mousedown="emit('mouse-down', $event)"
+    @mousedown="moveEmit('mouse-down', $event)"
   >
     <div class="pin-contain">
       <Icon
@@ -64,12 +63,12 @@ const weatherInfoFull = ref({
         <h2 v-show="weatherInfoFull.cityName">
           {{ weatherInfo.location.name }}
         </h2>
-        <p v-show="weatherInfoFull.temp">
+        <span v-show="weatherInfoFull.temp">
           {{ weatherInfo.current.temp_c.toFixed(0) }}°C
-        </p>
-        <p v-show="weatherInfoFull.text">
+        </span>
+        <span v-show="weatherInfoFull.text">
           {{ weatherInfo.current.condition.text }}
-        </p>
+        </span>
       </div>
     </div>
     <div class="pin-footer">
@@ -77,18 +76,30 @@ const weatherInfoFull = ref({
         :key="iconEdit"
         :name="iconEdit"
         size="25"
-        @click="a"
+        @click="add"
       />
-      <div v-if="editPin" class="editor pin">
-        <v-checkbox v-model="weatherInfoFull.cityName" label="View name City" />
-        <v-checkbox v-model="weatherInfoFull.temp" label="View Temp" />
-        <v-checkbox v-model="weatherInfoFull.text" label="View Text" />
-      </div>
+      <Transition>
+        <div v-if="editPin" class="editor pin">
+          <v-checkbox v-model="weatherInfoFull.cityName" label="View name City" />
+          <v-checkbox v-model="weatherInfoFull.temp" label="View Temp" />
+          <v-checkbox v-model="weatherInfoFull.text" label="View Text" />
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 :deep(.v-input) {
   height: 20%;
 }
@@ -96,9 +107,16 @@ const weatherInfoFull = ref({
 .pin {
   position: absolute;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 20px;
-  box-shadow: 0px 0px 20px var(--bs-color-primary);
+  box-shadow: 0px 0px 5px var(--bs-color-primary);
   background-color: var(--bg-main-color);
+  height: 100%;
+  width: 100%;
+  max-height: 200px;
+  max-width: 300px;
 
   &-footer {
     display: flex;
@@ -110,7 +128,7 @@ const weatherInfoFull = ref({
     .editor {
       border-radius: 20px;
       position: absolute;
-      right: -220px;
+      right: -230px;
       top: 0;
       width: 200px;
       height: 200px;
@@ -120,9 +138,7 @@ const weatherInfoFull = ref({
 
   &-contain {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+    justify-content: space-between;
 
     &__text {
       align-items: end;

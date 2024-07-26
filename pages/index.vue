@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import WeatherContent from '~/components/pin/weather/ui/weather-content.vue'
+
 const draggable = ref<HTMLElement | null>(null)
 const block = ref<HTMLElement | null>(null)
 const isDragging = ref(false)
@@ -62,12 +64,12 @@ onUnmounted(() => {
       />
     </div>
     <div ref="block" class="block">
-      <PinWeather
-        :class="{ active: editDashboard }"
-        @ref-created="draggable = $event"
-        @mouse-down="startDrag($event)"
-      />
-      <SharedPinEditor />
+      <ClientOnly>
+        <WeatherContent
+          :class="{ active: editDashboard }"
+          @mouse-down="startDrag($event)"
+        />
+      </ClientOnly>
     </div>
   </section>
 </template>

@@ -1,20 +1,15 @@
 <script setup lang="ts">
-const store = setupStore(['global'])
-
-function save() {
-  store.global.selectedComponetn = null
-  store.global.openEdit = false
-}
+const isEdit = defineModel<boolean>('edit', { default: null })
 </script>
 
 <template>
   <Teleport to="body">
-    <div v-if="store.global.openEdit" class="modal">
-      <div class="">
-        <component :is="store.global.selectedComponetn" />
+    <div class="modal">
+      <div>
+        <slot />
       </div>
       <div class="modal-contant">
-        <button @click="save">
+        <button @click="isEdit = false">
           Save
         </button>
       </div>

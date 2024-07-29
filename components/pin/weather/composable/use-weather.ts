@@ -1,10 +1,8 @@
 import type { CardProps } from '../types'
 import getWeatherIcon from '~/utils/shared/weather-icons'
 
-export async function useWeather() {
-  const { data } = await useFetch('/api/geolocation')
-
-  const weatherInfo = await api.weather({ q: data.value?.regionName ? data.value?.regionName : 'Oslo' })
+export async function useWeather(regionName?: string) {
+  const weatherInfo = await api.weather({ q: regionName ?? 'Oslo' })
 
   const elementSettings = ref({
     cityName: true,

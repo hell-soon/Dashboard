@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import type { CardProps } from '../types'
 
-interface Props extends CardProps {
-  editable?: boolean
-}
+defineProps<CardProps>()
 
-defineProps<Props>()
-
-const isEdit = defineModel<boolean>('edit')
 </script>
 
 <template>
@@ -29,31 +24,11 @@ const isEdit = defineModel<boolean>('edit')
         </span>
       </div>
     </div>
-    <div v-if="editable" class="pin-footer">
-      <Icon
-        name="line-md:edit"
-        size="25"
-        @click="isEdit = true"
-      />
-    </div>
+    <slot />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-:deep(.v-input) {
-  height: 20%;
-}
-
 .pin {
   position: absolute;
   padding: 20px;
@@ -68,24 +43,6 @@ const isEdit = defineModel<boolean>('edit')
   max-height: 200px;
   max-width: 300px;
 
-  &-footer {
-    display: flex;
-    width: 100%;
-    padding-top: 10px;
-    align-items: center;
-    justify-content: end;
-
-    .editor {
-      border-radius: 20px;
-      position: absolute;
-      right: -230px;
-      top: 0;
-      width: 200px;
-      height: 200px;
-      padding: 15px;
-    }
-  }
-
   &-contain {
     display: flex;
     justify-content: space-between;
@@ -96,6 +53,24 @@ const isEdit = defineModel<boolean>('edit')
       flex-direction: column;
       gap: 10px;
     }
+  }
+}
+
+:deep(.pin-footer) {
+  display: flex;
+  width: 100%;
+  padding-top: 10px;
+  align-items: center;
+  justify-content: end;
+
+  .editor {
+    border-radius: 20px;
+    position: absolute;
+    right: -230px;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    padding: 15px;
   }
 }
 </style>

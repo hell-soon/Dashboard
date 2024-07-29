@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import WeatherContent from '~/components/pin/weather/ui/weather-content.vue'
 
-const draggable = ref<HTMLElement | null>(null)
-const block = ref<HTMLElement | null>(null)
+const draggable = ref<InstanceType<typeof WeatherContent> | null>(null)
+const block = ref<HTMLElement>()
 const isDragging = ref(false)
 const offsetX = ref(0)
 const offsetY = ref(0)
 
-const editDashboard = ref(false)
+const stores = setupStore(['global'])
 
 function startDrag(e: MouseEvent) {
-  if (!editDashboard.value)
+  if (!stores.global.dashboardEdit)
     return
   if (draggable.value) {
     isDragging.value = true
-    offsetX.value = e.clientX - draggable.value.offsetLeft
-    offsetY.value = e.clientY - draggable.value.offsetTop
+    offsetX.value = e.clientX - draggable.value?.cardEl?.$el.offsetLeft
+    offsetY.value = e.clientY - draggable.value?.cardEl?.$el.offsetTop
   }
 }
 
 function drag(e: MouseEvent) {
-  if (!editDashboard.value)
+  if (!stores.global.dashboardEdit)
     return
 
   if (isDragging.value && draggable.value) {
@@ -28,17 +28,18 @@ function drag(e: MouseEvent) {
     const newTop = e.clientY - offsetY.value
 
     if (newLeft >= 0 && newTop >= 0
-      && newLeft + draggable.value.offsetWidth <= block.value!.clientWidth
-      && newTop + draggable.value.offsetHeight <= block.value!.clientHeight
+      && newLeft + draggable.value?.cardEl?.$el.offsetWidth <= block.value!.clientWidth
+      && newTop + draggable.value?.cardEl?.$el.offsetHeight <= block.value!.clientHeight
+      && draggable.value?.cardEl?.$el.style 
     ) {
-      draggable.value.style.left = `${newLeft}px`
-      draggable.value.style.top = `${newTop}px`
+      draggable.value.cardEl.$el.style.left = `${newLeft}px`
+      draggable.value.cardEl.$el.style.top = `${newTop}px`
     }
   }
 }
 
 function stopDrag() {
-  if (!editDashboard.value)
+  if (!stores.global.dashboardEdit)
     return
   isDragging.value = false
 }
@@ -58,18 +59,16 @@ onUnmounted(() => {
   <section>
     <div class="header">
       <h3>Dashboard</h3>
-      <SharedButton
-        :text="editDashboard ? 'Save' : 'Edit'"
-        @click="editDashboard = !editDashboard"
+      <UiButton
+        :text="stores.global.dashboardEdit ? 'Save' : 'Edit'"
+        @click="stores.global.dashboardEdit = !stores.global.dashboardEdit"
       />
     </div>
     <div ref="block" class="block">
-      <ClientOnly>
-        <WeatherContent
-          :class="{ active: editDashboard }"
-          @mouse-down="startDrag($event)"
-        />
-      </ClientOnly>
+      <WeatherContent
+        ref="draggable"
+        @mouse-down="startDrag($event)"
+      />
     </div>
   </section>
 </template>
@@ -86,10 +85,5 @@ onUnmounted(() => {
   position: relative;
   display: flex;
   height: 700px;
-}
-
-.active {
-  cursor: pointer;
-  animation: spin 0.4s infinite;
 }
 </style>

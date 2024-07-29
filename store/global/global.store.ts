@@ -1,13 +1,11 @@
 //* --- State ----------------------------------------------- *//
 interface GlobalState {
-  selectedComponetn: Component | null | undefined
-  openEdit: true | false
+  dashboardEdit: boolean
 }
 
 //* --- Store ----------------------------------------------- *//
 export const useGlobalStore = defineStore('global', {
   state: (): GlobalState => ({
-    selectedComponetn: null,
-    openEdit: false,
+    dashboardEdit: false,
   }),
 })

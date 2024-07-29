@@ -2,6 +2,7 @@ export interface Weather {
   location: Location
   current: Current
 }
+
 interface Location {
   name: string
   region: string
@@ -50,4 +51,3 @@ interface Condition {
   icon: string
   code: number
 }
-

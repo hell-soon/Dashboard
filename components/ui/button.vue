@@ -20,13 +20,13 @@ defineProps<Props>()
   align-items: center;
   padding: 8px 20px;
   border-radius: 10px;
-  border: 1px solid rgb(37, 37, 37);
+  border: 1px solid var(--bs-color-primary);
   cursor: pointer;
 
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: rgb(37, 37, 37);
+    background-color: var(--bs-color-primary);
   }
 }
 </style>

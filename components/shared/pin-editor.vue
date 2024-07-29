@@ -4,7 +4,12 @@ const isEdit = defineModel<boolean>('edit', { default: null })
 const openEdit = ref(false)
 
 function open() {
-  openEdit.value = !openEdit.value
+  openEdit.value = true
+}
+
+function save() {
+  openEdit.value = false
+  setTimeout(() => isEdit.value = false, 500)
 }
 
 setTimeout(open, 100)
@@ -13,16 +18,18 @@ setTimeout(open, 100)
 <template>
   <Teleport to="body">
     <div class="modal">
-      <div calss="modal-pin">
-        <slot />
-      </div>
-      <Transition name="slide-fade">
+      <Transition name="slide-left">
+        <div v-show="openEdit" class="modal-pin">
+          <slot />
+        </div>
+      </Transition>
+      <Transition name="slide-right">
         <div v-show="openEdit" class="modal-contant">
           <div class="settings">
             <slot name="settings" />
           </div>
           <div class="modal-contant__footer">
-            <UiButton text="Save" @click="isEdit = false" />
+            <UiButton text="Save" @click="save" />
           </div>
         </div>
       </Transition>
@@ -31,16 +38,24 @@ setTimeout(open, 100)
 </template>
 
 <style scoped lang="scss">
-.slide-fade-enter-active {
+.slide-left-enter-active,
+.slide-left-leave-active {
   transition: all 0.5s ease-out;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.8s ease-out;
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateY(-400px);
+  opacity: 0;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
   transform: translateX(400px);
   opacity: 0;
 }
@@ -52,11 +67,12 @@ setTimeout(open, 100)
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.6);
+  background-color: rgba($color: #838383, $alpha: 0.6);
 
-  :deep(.pin) {
+  &-pin {
+    position: relative;
     top: 30%;
-    left: 25%;
+    left: 35%;
     scale: 1.3;
   }
 
@@ -64,7 +80,9 @@ setTimeout(open, 100)
     position: absolute;
     height: 100%;
     width: 30vw;
-    background-color: azure;
+    margin: 10px;
+    border-radius: 20px;
+    background-color: var(--bg-main-color);
     right: 0;
 
     display: flex;

@@ -1,7 +1,7 @@
 @use './variables' as dark;
 
 @mixin dark-theme {
-  --bg-primary-main: #{dark.$bg-color-main};
+  --bg-main-color: #{dark.$bg-color-main};
 
   --bg-primary-color: #{dark.$bg-color-primary};
   --bg-secondary-color: #{dark.$bg-color-secondary};

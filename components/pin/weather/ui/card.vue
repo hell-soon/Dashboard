@@ -2,7 +2,6 @@
 import type { CardProps } from '../types'
 
 defineProps<CardProps>()
-
 </script>
 
 <template>
@@ -38,10 +37,11 @@ defineProps<CardProps>()
   border-radius: 20px;
   box-shadow: 0px 0px 5px var(--bs-color-primary);
   background-color: var(--bg-main-color);
-  height: 100%;
-  width: 100%;
-  max-height: 200px;
-  max-width: 300px;
+  min-height: 200px;
+  max-height: 300px;
+
+  min-width: 300px;
+  max-width: 400px;
 
   &-contain {
     display: flex;

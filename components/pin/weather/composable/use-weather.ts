@@ -7,8 +7,10 @@ export async function useWeather(regionName?: string) {
   const elementSettings = ref({
     cityName: true,
     temp: true,
-    text: false,
+    text: true,
+    
   })
+
   const weatherIcon = computed(() => getWeatherIcon(weatherInfo.current.condition.text) ?? '')
 
   const cardProps = computed<WeatherCardProps>(() => ({

@@ -65,6 +65,11 @@ const settings: WeatherCardSettingOption[] = [
           v-model="cardProps.settings[setting.key]"
           :label="setting.label"
         />
+        <!-- <UiSwitch
+          size="small"
+          off-text="Off"
+          on-text="On"
+          /> -->
       </div>
     </template>
   </SharedPinEditor>

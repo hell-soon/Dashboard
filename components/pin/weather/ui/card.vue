@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { CardProps } from '../types'
+import type { WeatherCardProps } from '../types'
 
-defineProps<CardProps>()
+defineProps<WeatherCardProps>()
 </script>
 
 <template>
@@ -62,6 +62,7 @@ defineProps<CardProps>()
   padding-top: 10px;
   align-items: center;
   justify-content: end;
+  cursor: pointer;
 
   .editor {
     border-radius: 20px;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useWeather } from '../composable'
+import type { WeatherCardSettingOption } from '../types'
 import Card from './card.vue'
 
 const emits = defineEmits<{
@@ -17,6 +18,21 @@ const { data } = await useFetch('/api/geolocation')
 const { cardProps } = await useWeather(data.value?.regionName)
 
 const isEdit = ref<boolean>(false)
+
+const settings: WeatherCardSettingOption[] = [
+  {
+    key: 'cityName',
+    label: 'View name City',
+  },
+  {
+    key: 'temp',
+    label: 'View Temp',
+  },
+  {
+    key: 'text',
+    label: 'View Text',
+  },
+]
 </script>
 
 <template>
@@ -41,9 +57,27 @@ const isEdit = ref<boolean>(false)
       :settings="cardProps.settings"
     />
     <template #settings>
-      <v-checkbox v-model="cardProps.settings.cityName" label="View name City" />
-      <v-checkbox v-model="cardProps.settings.temp" label="View Temp" />
-      <v-checkbox v-model="cardProps.settings.text" label="View Text" />
+      <div class="setting_wrapper">
+        <h2>Settings</h2>
+        <UiCheckbox
+          v-for="setting in settings"
+          :key="setting.key"
+          v-model="cardProps.settings[setting.key]"
+          :label="setting.label"
+        />
+      </div>
     </template>
   </SharedPinEditor>
 </template>
+
+<style lang="scss" scoped>
+.setting_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    text-align: center;
+  }
+}
+</style>

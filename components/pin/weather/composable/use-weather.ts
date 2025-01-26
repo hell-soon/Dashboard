@@ -1,8 +1,8 @@
-import type { CardProps } from '../types'
+import type { WeatherCardProps } from '../types'
 import getWeatherIcon from '~/utils/shared/weather-icons'
 
 export async function useWeather(regionName?: string) {
-  const weatherInfo = await api.weather({ q: regionName ?? 'Oslo' })
+  const weatherInfo = await api.weather({ q: regionName ?? 'Canada' })
 
   const elementSettings = ref({
     cityName: true,
@@ -11,7 +11,7 @@ export async function useWeather(regionName?: string) {
   })
   const weatherIcon = computed(() => getWeatherIcon(weatherInfo.current.condition.text) ?? '')
 
-  const cardProps = computed<CardProps>(() => ({
+  const cardProps = computed<WeatherCardProps>(() => ({
     payload: {
       weatherIcon: weatherIcon.value,
       ...weatherInfo,

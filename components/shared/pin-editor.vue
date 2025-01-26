@@ -69,6 +69,10 @@ setTimeout(open, 100)
   height: 100%;
   background-color: rgba($color: #838383, $alpha: 0.6);
 
+  .settings {
+    width: 100%;
+  }
+
   &-pin {
     position: relative;
     top: 30%;
@@ -81,6 +85,7 @@ setTimeout(open, 100)
     height: 100%;
     width: 30vw;
     margin: 10px;
+    padding: 40px;
     border-radius: 20px;
     background-color: var(--bg-main-color);
     right: 0;

@@ -22,7 +22,6 @@ defineProps<Props>()
   border-radius: 10px;
   border: 1px solid var(--bs-color-primary);
   cursor: pointer;
-
   transition: background-color 0.3s;
 
   &:hover {

@@ -74,7 +74,7 @@ function handleChange(event: Event) {
     overflow: hidden;
 
     .custom-checkbox__input:checked ~ & {
-      border-color: var(--color-white);
+      border-color: var(--color-text);
     }
   }
 

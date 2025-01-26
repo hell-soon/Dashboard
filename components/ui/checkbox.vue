@@ -68,6 +68,7 @@ function handleChange(event: Event) {
     position: relative;
     height: 24px;
     width: 24px;
+    
     border: 2px solid var(--bs-color-primary);
     border-radius: 6px;
     transition: border-color 0.3s;

@@ -29,14 +29,6 @@ defineProps<WeatherCardProps>()
 
 <style lang="scss" scoped>
 .pin {
-  position: absolute;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 20px;
-  box-shadow: 0px 0px 5px var(--bs-color-primary);
-  background-color: var(--bg-main-color);
   min-height: 200px;
   max-height: 300px;
 

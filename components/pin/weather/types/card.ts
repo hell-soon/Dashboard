@@ -1,7 +1,5 @@
 import type { Weather } from '~/types/models/weather'
 
-type WeatherCardSettingKey = keyof WeatherCardSettings
-
 export interface WeatherCardData extends Weather {
   weatherIcon: string
 }
@@ -13,7 +11,7 @@ export interface WeatherCardSettings {
 }
 
 export interface WeatherCardSettingOption {
-  key: WeatherCardSettingKey
+  key: keyof WeatherCardSettings
   label: string
 }
 

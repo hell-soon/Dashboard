@@ -8,7 +8,6 @@ export async function useWeather(regionName?: string) {
     cityName: true,
     temp: true,
     text: true,
-    
   })
 
   const weatherIcon = computed(() => getWeatherIcon(weatherInfo.current.condition.text) ?? '')

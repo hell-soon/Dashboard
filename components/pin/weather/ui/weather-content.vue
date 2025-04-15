@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useWeather } from '../composable'
 import type { WeatherCardSettingOption } from '../types'
+import { useWeather } from '../composable'
 import Card from './card.vue'
 
 const emits = defineEmits<{
@@ -65,11 +65,6 @@ const settings: WeatherCardSettingOption[] = [
           v-model="cardProps.settings[setting.key]"
           :label="setting.label"
         />
-        <!-- <UiSwitch
-          size="small"
-          off-text="Off"
-          on-text="On"
-          /> -->
       </div>
     </template>
   </SharedPinEditor>

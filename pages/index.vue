@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GithubContent from '~/components/pin/github/ui/github-content.vue'
 import WeatherContent from '~/components/pin/weather/ui/weather-content.vue'
 
 const draggable = ref<InstanceType<typeof WeatherContent> | null>(null)
@@ -65,7 +66,11 @@ onUnmounted(() => {
       />
     </div>
     <div ref="block" class="block">
-      <WeatherContent
+      <!-- <WeatherContent
+        ref="draggable"
+        @mouse-down="startDrag($event)"
+      /> -->
+      <GithubContent
         ref="draggable"
         @mouse-down="startDrag($event)"
       />

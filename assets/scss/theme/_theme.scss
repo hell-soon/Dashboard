@@ -1,10 +1,10 @@
-@import './light/theme.scss';
-@import './dark/theme.scss';
+@use "./light/theme.scss" as *;
+@use "./dark/theme.scss" as *;
 
-[data-theme='dark'] {
-  @include dark-theme
+[data-theme="dark"] {
+  @include dark-theme;
 }
 
-[data-theme='light'] {
-  @include light-theme
+[data-theme="light"] {
+  @include light-theme;
 }

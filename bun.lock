@@ -9,7 +9,7 @@
       },
       "devDependencies": {
         "@antfu/eslint-config": "^4.12.0",
-        "@dargmuesli/nuxt-cookie-control": "^8.6.1",
+        "@dargmuesli/nuxt-cookie-control": "^9.0.1",
         "@iconify-json/line-md": "^1.2.7",
         "@nuxt/eslint": "^1.3.0",
         "@nuxt/icon": "^1.12.0",
@@ -94,7 +94,7 @@
 
     "@cloudflare/kv-asset-handler": ["@cloudflare/kv-asset-handler@0.4.0", "", { "dependencies": { "mime": "^3.0.0" } }, "sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA=="],
 
-    "@dargmuesli/nuxt-cookie-control": ["@dargmuesli/nuxt-cookie-control@8.6.1", "", { "dependencies": { "@nuxt/kit": "^3.8.0", "css-vars-ponyfill": "^2.4.8", "defu": "^6.1.4", "string-replace-loader": "^3.1.0" } }, "sha512-OE+1v/pByVsjSms3c+9ruaK+1cFasHy/i/1zwivVM2JEpZ6Ou8oC91uCTvUTWJ2KDGQQl0vCFKESx/9LYhbtYw=="],
+    "@dargmuesli/nuxt-cookie-control": ["@dargmuesli/nuxt-cookie-control@9.0.2", "", { "dependencies": { "@nuxt/kit": "^3.8.0", "css-vars-ponyfill": "^2.4.8", "defu": "^6.1.4", "string-replace-loader": "^3.1.0" } }, "sha512-0wrBecOQx9Wi32zqxdOibVQGqgngFITwRw+S0gvdubnbRZz+i4rva2FUDhc6TURdQgqjI1zcRiQOOxO2jlJpAw=="],
 
     "@dprint/formatter": ["@dprint/formatter@0.3.0", "", {}, "sha512-N9fxCxbaBOrDkteSOzaCqwWjso5iAe+WJPsHC021JfHNj2ThInPNEF13ORDKta3llq5D1TlclODCvOvipH7bWQ=="],
 

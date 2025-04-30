@@ -2,7 +2,7 @@
 import GithubContent from '~/components/pin/github/ui/github-content.vue'
 import WeatherContent from '~/components/pin/weather/ui/weather-content.vue'
 
-const draggable = ref<InstanceType<typeof WeatherContent> | null>(null)
+const draggable = ref<InstanceType<typeof WeatherContent | typeof GithubContent> | null>(null)
 const block = ref<HTMLElement>()
 const isDragging = ref(false)
 const offsetX = ref(0)

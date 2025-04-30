@@ -23,7 +23,7 @@ async function fetch<Res>(apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_AP
 }
 
 export function getReq<Res>(
-  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY' | 'VITE_API_GITHUBPROFILE'],
   url: string,
   params?: any,
   headers?: any,
@@ -32,7 +32,7 @@ export function getReq<Res>(
 }
 
 export function postReq<Res>(
-  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY' | 'VITE_API_GITHUBPROFILE'],
   url: string,
   params?: any,
   headers?: any,
@@ -41,7 +41,7 @@ export function postReq<Res>(
 }
 
 export function putReq<Res>(
-  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY'],
+  apiSelect: ImportMetaEnv['VITE_API_WEATHER' | 'VITE_API_CITY' | 'VITE_API_GITHUBPROFILE'],
   url: string,
   params?: any,
   headers?: any,

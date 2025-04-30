@@ -4,19 +4,16 @@ import { useWeather } from '../composable'
 import Card from './card.vue'
 
 const emits = defineEmits<{
-  (e: 'mouse-down', move: MouseEvent): void
+  (e: 'mouseDown', move: MouseEvent): void
 }>()
 
 const cardEl = ref<InstanceType<typeof Card>>()
-
 const stores = setupStore(['global'])
 
 defineExpose({ cardEl })
 
 const { data } = await useFetch('/api/geolocation')
-
 const { cardProps } = await useWeather(data.value?.regionName)
-
 const isEdit = ref<boolean>(false)
 
 const settings: WeatherCardSettingOption[] = [
@@ -41,7 +38,7 @@ const settings: WeatherCardSettingOption[] = [
     :class="{ 'active-pin-edit': stores.global.dashboardEdit }"
     :payload="cardProps.payload"
     :settings="cardProps.settings"
-    @mousedown="emits('mouse-down', $event)"
+    @mousedown="emits('mouseDown', $event)"
   >
     <div class="pin-footer">
       <Icon
@@ -51,7 +48,10 @@ const settings: WeatherCardSettingOption[] = [
       />
     </div>
   </Card>
-  <SharedPinEditor v-if="isEdit" v-model:edit="isEdit">
+  <SharedPinEditor
+    v-if="isEdit"
+    v-model:edit="isEdit"
+  >
     <Card
       :payload="cardProps.payload"
       :settings="cardProps.settings"

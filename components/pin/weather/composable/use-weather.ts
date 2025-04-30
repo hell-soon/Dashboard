@@ -2,7 +2,7 @@ import type { WeatherCardProps } from '../types'
 import getWeatherIcon from '~/utils/shared/weather-icons'
 
 export async function useWeather(regionName?: string) {
-  const weatherInfo = await api.weather({ q: regionName ?? 'Canada' })
+  const weatherInfo = await api.weather({ q: regionName ?? 'Томск' })
 
   const elementSettings = ref({
     cityName: true,
